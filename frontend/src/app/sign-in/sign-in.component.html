@@ -1,0 +1,36 @@
+<div class="sign-in">
+    <header fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=10px style="background-color: #4651A6;color: white;">
+        <h2>Welcome to MessBill</h2>
+    </header>
+    <form [formGroup]='signinform' (ngSubmit)=onSubmit()>
+        <div class="main" style="height: 90vh;" fxLayout="column" fxLayoutAlign="center center">
+            <div class="main-form">
+                <div class="form-header">
+                    <h3>Sign In</h3>
+                </div>
+                <div class="phone">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Phone Number</mat-label>
+                        <input formControlName='phone' matInput placeholder="Enter your phone number" onkeypress= "return /[0-9]/i.test(event.key)" maxlength="10">
+                          <mat-error *ngIf="phone?.hasError('required')">please enter your Phone</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="password">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input formControlName='password' matInput placeholder="Enter your password">
+                        <mat-error *ngIf="password?.hasError('required')">please enter Password</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="submit-btn">
+                <button class="btn" (click)="addnewitem()" [disabled]="signinform.invalid" mat-raised-button color="primary">Sign In</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div>
+    <mat-option value="center top"></mat-option>
+    </div>
+</div>
+
+

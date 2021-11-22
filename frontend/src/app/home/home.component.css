@@ -1,0 +1,10 @@
+.mat-row:nth-child(even){
+    background-color: #e5e4f0;
+}
+.mat-header-cell{
+    background-color: #c7cff7;
+    text-align: center;
+}
+.mat-cell{
+    text-align: center;
+}

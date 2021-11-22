@@ -1,0 +1,29 @@
+<div class="header">
+  <h3 style="margin: 0px;">Add/Edit your bill</h3>
+</div>
+<div id="form" >
+    <form action="" [formGroup]="dataform" (ngSubmit)=onsubmit()>
+      <div fxLayout="row" fxLayoutAlign="space-around center">      
+        <mat-form-field appearance="outline" fxFlex="40">
+        <mat-label>Date</mat-label>
+        <input type="date" formControlName="date" matInput placeholder="Placeholder">
+        <mat-error *ngIf="date?.hasError('required')">Please enter correct date</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" fxFlex="40">
+        <mat-label>Amount(Rs)</mat-label>
+        <input formControlName="amount" matInput placeholder="Placeholder" onkeypress= "return /[0-9]/i.test(event.key)">
+        <mat-error *ngIf="amount?.hasError('required')">Please enter amount</mat-error>
+        </mat-form-field>
+      </div><br>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-form-field appearance="outline"  fxFlex='90'>
+          <mat-label>Description</mat-label>
+          <input formControlName="description" matInput placeholder="Placeholder" onkeypress= "return /[a-z]/i.test(event.key)">
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <button  [disabled]="dataform.invalid" mat-raised-button color="primary" style="width: 14%;">Done</button> &nbsp;&nbsp;&nbsp;&nbsp;
+        <button mat-raised-button color="accent" style="width: 14%;" (click)="onCancel()">Cancel</button>
+      </div>
+    </form>
+  </div>

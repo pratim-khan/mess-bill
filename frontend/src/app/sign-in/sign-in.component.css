@@ -1,0 +1,31 @@
+.header{
+    background-color: #4651A6;
+    color: white;;
+}
+.main .main-form{
+    border: 1px solid black; 
+    border-radius: 5px;
+}
+.main-form .form-header{
+    background-color: #4651A6; 
+    border-radius: 5px 5px 0px 0px; 
+    margin-bottom: 10px; 
+    padding: 10px; 
+    text-align: center;
+}
+.form-header h3{
+    margin: 0px; 
+    color: white;
+}
+.phone{
+    margin: 0px 10px
+}
+.password{
+    margin: 0px 10px;
+}
+.submit-btn{
+    margin:10px 10px;
+}
+.submit-btn .btn{
+    width: 100%;
+}
