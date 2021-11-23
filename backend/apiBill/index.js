@@ -6,7 +6,7 @@ module.exports = async function (context, req) {
 
   const Bill = db.collection('bill')
     try{
-        const res =await Bill.find({isdelete:"false"})
+        const res =await Bill.find({isdelete:false})
         let body = await res.toArray()
         context.res={
             status:200,

@@ -12,7 +12,9 @@
 <!-- form field -->
 <div fxLayout="row" fxLayoutGap='10%' style="margin: 2% 5%;" >
   <a href="home/add"><button  mat-raised-button color="primary" > Add row</button></a>
+  <a><button  mat-raised-button color="primary" (click)="checkamount()" > Check Due</button></a>
 </div>
+
 <!-- id Column -->
 <div  fxLayout="row" fxLayoutAlign="center center" >
   <table mat-table [dataSource]="datasource" class="mat-elevation-z8" style="width:90%;">
@@ -64,7 +66,5 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>
-<div>
-  <h1>git check</h1>
-</div>
+
 <ng-http-loader></ng-http-loader>

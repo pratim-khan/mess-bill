@@ -3,6 +3,8 @@ import { ServerService } from '../server.service';
 // import { MatTableDataSource } from '@angular/material/table';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+// import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-home',
@@ -15,7 +17,7 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   public test: any;
 
-  constructor( private server:ServerService , private router:Router) { }
+  constructor( private server:ServerService , private router:Router ) { }
 
   public text:any;
   public name:any;
@@ -86,7 +88,23 @@ export class HomeComponent implements OnInit {
   //   }
   //   this.server.getTable().subscribe(res => this.datasource = res )
   // }
-  
+  public due:any
+ async checkamount(){
+    let res:any = await this.server.checkData(this.test).toPromise();
+    this.due = res["due"]
+    if(this.due >= 0){
+      alert("you will get "+this.due+"Rs")
+    }else{
+      alert("you will pay "+ Math.abs(this.due) +"Rs")
+    }
+    // this.dialog.open(
+    //   dueDialog,{
+    //     data:{
+    //       message:'you will get ' + this.due
+    //     }
+    //   }
+    // )
 
+    }
+  }
 
-}

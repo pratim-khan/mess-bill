@@ -14,7 +14,8 @@ export class ServerService {
   public urlgettable = "http://localhost:7071/api/apiBill";
   public urldelete = "http://localhost:7071/api/apiDelete";
   public urlupdate = "http://localhost:7071/api/apiUpdate";
-  public urledit ="http://localhost:7071/api/apiEdit"
+  public urledit ="http://localhost:7071/api/apiEdit";
+  public checkurl ="http://localhost:7071/api/testApi"
 
   constructor(private http:HttpClient) { }
 
@@ -42,5 +43,8 @@ export class ServerService {
   }
   editdata():Observable<ipatch>{
     return this.http.get<ipatch>(this.urledit)
+  }
+  checkData(user:any){
+    return this.http.post(this.checkurl,user)
   }
 }
