@@ -22,8 +22,8 @@ export class SignInComponent implements OnInit {
   constructor(private server:ServerService , private router:Router ,private _snackBar: MatSnackBar) { }
 
   signinform = new FormGroup({
-    phone:new FormControl("1234567890",[Validators.required]),
-    password:new FormControl("abcd@1234",[Validators.required]),
+    phone:new FormControl("",[Validators.required]),
+    password:new FormControl("",[Validators.required]),
     authenticate:new FormControl("true")
   })
   public text:any
@@ -51,6 +51,7 @@ export class SignInComponent implements OnInit {
      }
      
      console.log(localStorage.getItem(this.name));
+     
   }
   @Output() newDataEmit= new EventEmitter<string>();
   addnewitem(){

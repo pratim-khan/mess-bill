@@ -29,7 +29,7 @@ module.exports = async function (context, req) {
             let due = (res-avg)
             context.res={
                 body: {
-                    due:due,
+                    due:due
                 }
             }
         }catch(error){
@@ -37,10 +37,10 @@ module.exports = async function (context, req) {
 }
 
 }else{
-    let  avg = (total[0].total)/6
+    let  avg = parseInt((total[0].total)/6)
     context.res={
         body:{
-            due:avg
+            due:avg * -1
         }
     }
 }

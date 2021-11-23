@@ -32,8 +32,9 @@ export class ServerService {
   addData(user:any){
     return this.http.post(this.urlpost,user)
   }
-  getTable():Observable<iElement>{
-    return this.http.get<iElement>(this.urlgettable)
+  getTable(user:any){
+    let headers = new Headers
+    return this.http.post(this.urlgettable,user)
   }
   deleteData(user:any){
     return this.http.post(this.urldelete,user)

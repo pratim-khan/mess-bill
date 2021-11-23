@@ -11,7 +11,7 @@
         </mat-form-field>
         <mat-form-field appearance="outline" fxFlex="40">
         <mat-label>Amount(Rs)</mat-label>
-        <input formControlName="amount" matInput placeholder="Placeholder" onkeypress= "return /[0-9]/i.test(event.key)">
+        <input formControlName="amount" type="number" matInput placeholder=0 onkeypress= "return /[0-9]/i.test(event.key)">
         <mat-error *ngIf="amount?.hasError('required')">Please enter amount</mat-error>
         </mat-form-field>
       </div><br>
@@ -27,3 +27,6 @@
       </div>
     </form>
   </div>
+<div>
+  {{dataform.value|json}}
+</div>

@@ -22,10 +22,15 @@ export class HomeComponent implements OnInit {
   public text:any;
   public name:any;
   // public test:any;
-  ngOnInit(): void {
-    this.server.getTable().subscribe(res => this.datasource = res );
+  public authenticate = true
+  async ngOnInit() {
+    // this.server.getTable(this.authenticate).subscribe(res => this.datasource = res );
+    let res:any = await this.server.getTable(this.authenticate).toPromise();
+    this.datasource = res["data"]
     this.test = localStorage.getItem("name");
     this.patchvalue=this.server.editdata()
+    console.log(typeof(this.authenticate)),
+    console.log(this.authenticate)
 
   }
   public d = new Date();
@@ -50,16 +55,18 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  ondelete(element:any){
+  async ondelete(element:any){
     this.datasource.forEach((value:any,dex:any) => {
       if(value == element){
         // this.datasource.splice(dex,1)
         console.log(element.uid)
-        this.server.deleteData(element).subscribe()
+       this.server.deleteData(element).subscribe()
         // this.server.getTable().subscribe(res => this.datasource = res )
+         
       }
+      
     })
-      this.server.getTable().subscribe(res => this.datasource = res )
+    this.server.getTable(this.authenticate).subscribe()
   }
   public data:any
   public patchvalue:any=[]
@@ -93,9 +100,9 @@ export class HomeComponent implements OnInit {
     let res:any = await this.server.checkData(this.test).toPromise();
     this.due = res["due"]
     if(this.due >= 0){
-      alert("you will get "+this.due+"Rs")
+      alert("You will get "+this.due+" Rs")
     }else{
-      alert("you will pay "+ Math.abs(this.due) +"Rs")
+      alert("You will pay "+ Math.abs(this.due) +" Rs")
     }
     // this.dialog.open(
     //   dueDialog,{
@@ -105,6 +112,14 @@ export class HomeComponent implements OnInit {
     //   }
     // )
 
+    }
+    onlogout(){
+      this.router.navigate([''])
+      this.authenticate = false
+      if (this.authenticate == false){
+        alert("Are you sure to logout ?")
+      }
+      console.log(this.authenticate)
     }
   }
 

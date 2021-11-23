@@ -10,7 +10,7 @@ module.exports = async function (context, req) {
   Bill.update(
       {uid:UID},
       {$set:{
-        isdelete:"true"
+        isdelete:true
       }
     }
   )

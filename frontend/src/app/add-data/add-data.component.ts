@@ -40,7 +40,7 @@ export class AddDataComponent implements OnInit {
   }
   public dataform =  this.fb.group({
     date: new FormControl('',[Validators.required]),
-    amount: new FormControl(parseInt(''),[Validators.required]),
+    amount: new FormControl(0 ,[Validators.required]),
     description: new FormControl(''),
     isdelete: new FormControl(false)});
   get date(){
@@ -56,9 +56,11 @@ export class AddDataComponent implements OnInit {
     this.dataform.addControl("name", this.fb.control(this.test, [Validators.required]));
   }
   public test:any
+  public autheticate:any=true
   onsubmit() {
     this.server.addData(this.dataform.value).subscribe()
     this.router.navigate(["/home"])
+    this.server.getTable(this.autheticate.value).subscribe()
   }
   onCancel(){
     this.router.navigate(["/home"])
