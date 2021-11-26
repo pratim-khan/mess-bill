@@ -1,5 +1,5 @@
 export interface iElement {
-    "id":number,
+    "uid":number,
     "name":string,
     "username":string,
     "email":string,

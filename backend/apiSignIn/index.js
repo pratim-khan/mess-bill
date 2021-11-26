@@ -1,4 +1,7 @@
 const MongoClient = require('../mongo/mongo');
+const jwt = require('jsonwebtoken');
+// const localStorage = require ("node-localstorage");
+const sessionstorage = require('sessionstorage');
 
 module.exports = async function (context, req) {
 
@@ -6,20 +9,23 @@ module.exports = async function (context, req) {
 
   const Signin = db.collection('signin')
 
-  
+  var token = jwt.sign({ foo: 'bar' }, 'shhhhh');
+  let demo = sessionstorage.setItem("token",token)
+  let test = sessionstorage.getItem("token")
+  // console.log(test)
+    
   let phone = req.body.phone
   let password = req.body.password
   // let name = req.body.name
-  let authenticate = req.body.authenticate
 
   try {
-    if(authenticate === "true"){
       let rest = await Signin.findOne({ phone:phone})
       if(rest.password === password){
         context.res={
           body:{
             text:'You are successfully signed in',
-            name:rest.name
+            name:rest.name ,
+            token: token
           }
         }
       }else{
@@ -29,14 +35,6 @@ module.exports = async function (context, req) {
         }
       }
       }
-    }
-    else{
-      context.res={
-        body:{
-          text:'you are not authorized to access the data '
-        }
-      }
-    }
 
   }catch (error) {
           context.res = {
@@ -46,6 +44,4 @@ module.exports = async function (context, req) {
           }
         }
 
-      }
-  
-  
+}

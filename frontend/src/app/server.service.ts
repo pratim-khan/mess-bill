@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { iElement } from './interface/element';
@@ -10,12 +10,15 @@ import { ipatch } from './interface/patch';
 })
 export class ServerService {
   public url ='http://localhost:7071/api/apiSignIn';
+  // public urlgettable ='http://localhost:7071/api/demoApi';
+  
   private urlpost = "http://localhost:7071/api/addData";
   public urlgettable = "http://localhost:7071/api/apiBill";
   public urldelete = "http://localhost:7071/api/apiDelete";
   public urlupdate = "http://localhost:7071/api/apiUpdate";
   public urledit ="http://localhost:7071/api/apiEdit";
-  public checkurl ="http://localhost:7071/api/testApi"
+  public checkurl ="http://localhost:7071/api/testApi";
+  public urlregister="http://localhost:7071/api/apiRegister"
 
   constructor(private http:HttpClient) { }
 
@@ -32,9 +35,15 @@ export class ServerService {
   addData(user:any){
     return this.http.post(this.urlpost,user)
   }
-  getTable(user:any){
-    let headers = new Headers
-    return this.http.post(this.urlgettable,user)
+  getTable(){
+    // let headers = new Headers
+    // return this.http.post(this.urlgettable,user)
+    return this.http.get(this.urlgettable,
+      {
+      observe : 'body',
+      params:new HttpParams().append('token', localStorage.getItem("token") || "{}")
+    }
+    )
   }
   deleteData(user:any){
     return this.http.post(this.urldelete,user)
@@ -47,5 +56,8 @@ export class ServerService {
   }
   checkData(user:any){
     return this.http.post(this.checkurl,user)
+  }
+  registerdata(user:any){
+    return this.http.post(this.urlregister,user)
   }
 }

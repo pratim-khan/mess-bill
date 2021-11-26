@@ -22,6 +22,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AddDataComponent } from './add-data/add-data.component';
 import { MatDialogComponent } from './mat-dialog/mat-dialog.component';
+import { RegisterComponent } from './register/register.component';
 
 
 
@@ -34,7 +35,8 @@ import { MatDialogComponent } from './mat-dialog/mat-dialog.component';
     SignInComponent,
     HomeComponent,
     AddDataComponent,
-    MatDialogComponent
+    MatDialogComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

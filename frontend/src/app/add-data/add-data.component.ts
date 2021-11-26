@@ -60,7 +60,7 @@ export class AddDataComponent implements OnInit {
   onsubmit() {
     this.server.addData(this.dataform.value).subscribe()
     this.router.navigate(["/home"])
-    this.server.getTable(this.autheticate.value).subscribe()
+    // this.server.getTable(this.autheticate.value).subscribe()
   }
   onCancel(){
     this.router.navigate(["/home"])

@@ -25,12 +25,12 @@ export class HomeComponent implements OnInit {
   public authenticate = true
   async ngOnInit() {
     // this.server.getTable(this.authenticate).subscribe(res => this.datasource = res );
-    let res:any = await this.server.getTable(this.authenticate).toPromise();
-    this.datasource = res["data"]
+    // let res:any = await this.server.getTable(this.authenticate).toPromise();
+    // this.datasource = res["data"]
+    this.server.getTable().subscribe(data=> this.datasource = data)
     this.test = localStorage.getItem("name");
     this.patchvalue=this.server.editdata()
-    console.log(typeof(this.authenticate)),
-    console.log(this.authenticate)
+    console.log(this.datasource)
 
   }
   public d = new Date();
@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit {
       }
       
     })
-    this.server.getTable(this.authenticate).subscribe()
+    // this.server.getTable(this.authenticate).subscribe()
   }
   public data:any
   public patchvalue:any=[]
@@ -115,11 +115,6 @@ export class HomeComponent implements OnInit {
     }
     onlogout(){
       this.router.navigate([''])
-      this.authenticate = false
-      if (this.authenticate == false){
-        alert("Are you sure to logout ?")
-      }
-      console.log(this.authenticate)
-    }
+      localStorage.removeItem("token")
   }
-
+}

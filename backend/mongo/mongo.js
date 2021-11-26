@@ -1,7 +1,7 @@
 const { MongoClient } = require("mongodb");
 
 const config = {
-  url: "mongodb+srv://messBill:messbill1234@cluster0.wnozb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  url: "mongodb+srv://messBill:mess1234@cluster0.wnozb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
   dbName: "messbill"
 };
 
