@@ -19,7 +19,8 @@ export class AddDataComponent implements OnInit {
     this.addDynamicControls();
 
     this.patchdata = this.server.editdata()
-    
+    let editData:any = localStorage.getItem("editData")
+    this.dataform.patchValue(JSON.parse(editData))
   }
   public dataform =  this.fb.group({
     date: new FormControl('',[Validators.required]),
@@ -43,10 +44,14 @@ export class AddDataComponent implements OnInit {
   public test:any
   public autheticate:any=true
   onsubmit() {
-    this.server.addData(this.dataform.value).subscribe()
-    this.router.navigate(["/home"])
-  }
+    this.server.addData(this.dataform.value).subscribe(
+      (res:any)=>{
+      this.router.navigate(['home'])
+  })
+  localStorage.removeItem("editData")
+}
   onCancel(){
     this.router.navigate(["/home"])
+    localStorage.removeItem("editData")
   }
 }

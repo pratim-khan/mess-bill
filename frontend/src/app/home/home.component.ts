@@ -80,7 +80,13 @@ export class HomeComponent implements OnInit {
 
     let selectedUid = element.uid
     this.router.navigate(['/home/add'],{queryParams:{uid:selectedUid}})
-  }
+    if(!localStorage.getItem('initData')){
+      localStorage.setItem("editData",JSON.stringify(element))
+     }
+    //  console.log(element)
+    // let ediddata:any =localStorage.getItem("editData")
+    // console.log(JSON.parse(ediddata))
+}
   public due:any
  async checkamount(){
     let res:any = await this.server.checkData(this.test).toPromise();
