@@ -2,7 +2,7 @@
   <h3 style="margin: 0px;">Add/Edit your bill</h3>
 </div>
 <div id="form" >
-    <form action="" [formGroup]="dataform" (ngSubmit)=onsubmit()>
+    <form action="" [formGroup]="dataform" >
       <div fxLayout="row" fxLayoutAlign="space-around center">      
         <mat-form-field appearance="outline" fxFlex="40">
         <mat-label>Date</mat-label>
@@ -22,8 +22,8 @@
         </mat-form-field>
       </div>
       <div fxLayout="row" fxLayoutAlign="center center">
-        <button  [disabled]="dataform.invalid" mat-raised-button color="primary" style="width: 14%;">Done</button> &nbsp;&nbsp;&nbsp;&nbsp;
-        <button mat-raised-button color="accent" style="width: 14%;" (click)="onCancel()">Cancel</button>
+        <button  [disabled]="dataform.invalid" (click)="onsubmit()" mat-raised-button color="primary" style="width: 14%;">Done</button> &nbsp;&nbsp;&nbsp;&nbsp;
+        <button mat-raised-button color="accent" style="width: 14%;" (click)="onCancel()" >Cancel</button>
       </div>
     </form>
   </div>

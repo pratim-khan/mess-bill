@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { ServerService } from '../server.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { Output, EventEmitter } from '@angular/core';
+import { GoogleLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
+
 
 @Component({
   selector: 'app-sign-in',
@@ -19,12 +21,13 @@ export class SignInComponent implements OnInit {
     return this.signinform.get('phone')
   }
 
-  constructor(private server:ServerService , private router:Router ,private _snackBar: MatSnackBar) { }
+
+  constructor(private server:ServerService , private router:Router ,private _snackBar: MatSnackBar,public socialAuthService:SocialAuthService) { }
 
   signinform = new FormGroup({
-    phone:new FormControl("1234567890",[Validators.required]),
-    password:new FormControl("abcd@1234",[Validators.required]),
-    authenticate:new FormControl("true")
+    phone:new FormControl("",[Validators.required]),
+    password:new FormControl("",[Validators.required]),
+    googleUser:new FormControl(false)
   })
   public text:any
   public name:any
@@ -40,27 +43,51 @@ export class SignInComponent implements OnInit {
     this.text = res["text"]
     this.name = res["name"]
     this.token = res["token"]
-    console.log(this.token.toString())
-    console.log(this.name)
+
+
     localStorage.setItem("token",this.token.toString())
      if(this.text==='You are successfully signed in'){
        this._snackBar.open(this.text,'OK');
 
-      this.router.navigate(["home"]);
+      this.router.navigate(['home']);
       
-     }
-     else{
+     }else{
        alert(this.text)
      }
      if(!localStorage.getItem('initData')){
       localStorage.setItem("name",this.name)
      }
      
-     console.log(localStorage.getItem(this.name));
      
   }
   @Output() newDataEmit= new EventEmitter<string>();
   addnewitem(){
     this.newDataEmit.emit(this.name)
   }
+  public googleDetails :any
+  googleLogin(){
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(async()=>{
+      this.googleDetails = this.socialAuthService["_user"]
+      let res:any= await this.server.signin(this.googleDetails).toPromise();
+      this.text = res.text
+      this.name = res.name
+      this.token = res.token
+      console.log(res)
+      console.log(this.token) 
+      localStorage.setItem("token",this.token)
+      if(this.text==='You are successfully signed in'){
+        this._snackBar.open(this.text,'OK');
+        this.router.navigate(['home'])
+      }
+      else{
+        alert(this.text)
+      }
+      if(!localStorage.getItem('initData')){
+        localStorage.setItem("name",this.name)
+       }
+    }
+   
+    )  
+  }
+    
 }

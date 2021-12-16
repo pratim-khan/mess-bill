@@ -2,7 +2,7 @@
     <header fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=10px style="background-color: #4651A6;color: white;">
         <h2>Welcome to MessBill</h2>
     </header>
-    <form [formGroup]='registrationform' (ngSubmit)="onsubmit()">
+    <form [formGroup]='registrationform' >
         <div class="main" style="height: 90vh;" fxLayout="column" fxLayoutAlign="center center">
             <div class="main-form">
                 <div class="form-header">
@@ -12,7 +12,7 @@
                 <div class="name">
                     <mat-form-field appearance="outline">
                         <mat-label>Full Name</mat-label>
-                        <input formControlName='name' matInput placeholder="Enter your phone number" onkeypress= "return /[a-z]/i.test(event.key)" maxlength="10">
+                        <input formControlName='name' matInput placeholder="Enter your phone number" onkeypress= "return !/[0-9]/i.test(event.key)">
                           <mat-error *ngIf="name?.hasError('required')">please enter your full name</mat-error>
                     </mat-form-field>
                 </div>
@@ -31,9 +31,16 @@
                     </mat-form-field>
                 </div>
                 <div class="submit-btn">
-                <button class="btn" [disabled]="registrationform.invalid" mat-raised-button color="primary">Register</button>
+                <button class="btn" [disabled]="registrationform.invalid" (click)="onsubmit()" mat-raised-button color="primary">Register</button>
                 </div>
             </div>
-
+            <div>
+                <small>Already register</small> &nbsp; &nbsp;
+                <a href="/signin"><b>Sign-in here</b> </a>
+            </div>
+            <div>
+                <small>Or Register with</small> &nbsp; &nbsp;
+                <button class="btn" mat-raised-button color="primary" (click)="googleLogin()">Google</button>
+            </div>
         </div>
     </form>

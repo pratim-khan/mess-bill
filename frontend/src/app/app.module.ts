@@ -23,10 +23,20 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AddDataComponent } from './add-data/add-data.component';
 import { MatDialogComponent } from './mat-dialog/mat-dialog.component';
 import { RegisterComponent } from './register/register.component';
+import { GoogleLoginProvider,SocialLoginModule } from 'angularx-social-login';
+import { AuthGuardService } from './auth-guard.service';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {DragDropModule} from '@angular/cdk/drag-drop'
 
+import { environment } from 'src/environments/environment';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
-
-
+const config: SocketIoConfig = {
+	url: environment.socketUrl, // socket server url;
+	options: {
+		transports: ['websocket']
+	}
+}
 
 
 @NgModule({
@@ -53,9 +63,26 @@ import { RegisterComponent } from './register/register.component';
     MatTableModule,
     MatSelectModule,
     MatSnackBarModule,
-    NgHttpLoaderModule.forRoot()
+    NgHttpLoaderModule.forRoot(),
+    SocialLoginModule,
+    MatPaginatorModule,
+    DragDropModule,
+    SocketIoModule.forRoot(config), 
   ],
-  providers: [],
+
+  providers: [{
+    provide: 'SocialAuthServiceConfig',
+    useValue: {
+      autoLogin: true, //keeps the user signed in
+      providers: [
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider('701202602079-njqfafnsq0uuhfgpfi6hshrc570uhjp9.apps.googleusercontent.com') // your client id
+        }
+      ]
+    }
+  },
+    AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -19,30 +19,15 @@ export class AddDataComponent implements OnInit {
     this.addDynamicControls();
 
     this.patchdata = this.server.editdata()
-    // this.route.queryParams.subscribe((param:any)=>{
-    //   if(param['uid']){
-    //     let uid =param['uid'];
-    //     this.Uid = uid
-    //     let params ={uid}
-    //     this.server.editdata(params).subscribe(data=>{
-    //       let value=data;
-    //       this.dataform.patchValue(value)
-    //     })
-    //   }
-    // })
-    // this.route.queryParams.subscribe((param:any)=>{
-    //   if(param['uid']){
-    //     let uid = param['uid'];
-    //     this.
-    //   }
-    // })
     
   }
   public dataform =  this.fb.group({
     date: new FormControl('',[Validators.required]),
     amount: new FormControl(0 ,[Validators.required]),
     description: new FormControl(''),
-    isdelete: new FormControl(false)});
+    isdelete: new FormControl(false),
+    uid : new FormControl(0)
+  })
   get date(){
     return this.dataform.get('date')
   }
@@ -60,7 +45,6 @@ export class AddDataComponent implements OnInit {
   onsubmit() {
     this.server.addData(this.dataform.value).subscribe()
     this.router.navigate(["/home"])
-    // this.server.getTable(this.autheticate.value).subscribe()
   }
   onCancel(){
     this.router.navigate(["/home"])
