@@ -83,9 +83,6 @@ export class HomeComponent implements OnInit {
     if(!localStorage.getItem('initData')){
       localStorage.setItem("editData",JSON.stringify(element))
      }
-    //  console.log(element)
-    // let ediddata:any =localStorage.getItem("editData")
-    // console.log(JSON.parse(ediddata))
 }
   public due:any
  async checkamount(){

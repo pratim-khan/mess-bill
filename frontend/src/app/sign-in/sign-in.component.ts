@@ -43,7 +43,10 @@ export class SignInComponent implements OnInit {
     this.text = res["text"]
     this.name = res["name"]
     this.token = res["token"]
-
+         
+    if(!localStorage.getItem('initData')){
+      localStorage.setItem("name",this.name)
+     }
 
     localStorage.setItem("token",this.token.toString())
      if(this.text==='You are successfully signed in'){
@@ -53,12 +56,7 @@ export class SignInComponent implements OnInit {
       
      }else{
        alert(this.text)
-     }
-     if(!localStorage.getItem('initData')){
-      localStorage.setItem("name",this.name)
-     }
-     
-     
+     }  
   }
   @Output() newDataEmit= new EventEmitter<string>();
   addnewitem(){
@@ -72,8 +70,6 @@ export class SignInComponent implements OnInit {
       this.text = res.text
       this.name = res.name
       this.token = res.token
-      console.log(res)
-      console.log(this.token) 
       localStorage.setItem("token",this.token)
       if(this.text==='You are successfully signed in'){
         this._snackBar.open(this.text,'OK');
