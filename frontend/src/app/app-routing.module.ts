@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddDataComponent } from './add-data/add-data.component';
+import { CheckboxSheetComponent } from './checkbox-sheet/checkbox-sheet.component';
 // import { AuthGuardService } from './auth-guard.service';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
@@ -12,17 +13,8 @@ const routes: Routes = [
   { path:'home', component:HomeComponent, },
   { path:'register',component:RegisterComponent},
   {path:'home/add',component:AddDataComponent},
+  {path:'home/check',component:CheckboxSheetComponent},
   {path:'**',redirectTo:'/signin',pathMatch:'full'}
-  // {
-  //   path:"signin" ,component:SignInComponent, children:
-  //   [
-  //     {path:'' , redirectTo:'signin' ,pathMatch:'full'},
-  //     { path:'home', component:HomeComponent},
-  //     { path:'register',component:RegisterComponent},
-  //     {path:'home/add',component:AddDataComponent},
-  //     {path:'**',redirectTo:'signin',pathMatch:'full'}
-  //   ]
-  // }
 ];
 
 @NgModule({

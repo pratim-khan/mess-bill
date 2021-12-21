@@ -20,8 +20,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatIconModule} from '@angular/material/icon';
 import { AddDataComponent } from './add-data/add-data.component';
-import { MatDialogComponent } from './mat-dialog/mat-dialog.component';
 import { RegisterComponent } from './register/register.component';
 import { GoogleLoginProvider,SocialLoginModule } from 'angularx-social-login';
 import { AuthGuardService } from './auth-guard.service';
@@ -30,6 +30,10 @@ import {DragDropModule} from '@angular/cdk/drag-drop'
 
 import { environment } from 'src/environments/environment';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import {MatDialogModule} from '@angular/material/dialog';
+import { CheckboxSheetComponent } from './checkbox-sheet/checkbox-sheet.component';
+import { DialogComponent } from './dialog/dialog.component';
+
 
 const config: SocketIoConfig = {
 	url: environment.socketUrl, // socket server url;
@@ -45,8 +49,9 @@ const config: SocketIoConfig = {
     SignInComponent,
     HomeComponent,
     AddDataComponent,
-    MatDialogComponent,
-    RegisterComponent
+    RegisterComponent,
+    CheckboxSheetComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +72,9 @@ const config: SocketIoConfig = {
     SocialLoginModule,
     MatPaginatorModule,
     DragDropModule,
-    SocketIoModule.forRoot(config), 
+    SocketIoModule.forRoot(config),
+    MatDialogModule,
+    MatIconModule
   ],
 
   providers: [{

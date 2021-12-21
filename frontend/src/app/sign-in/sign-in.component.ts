@@ -24,6 +24,15 @@ export class SignInComponent implements OnInit {
 
   constructor(private server:ServerService , private router:Router ,private _snackBar: MatSnackBar,public socialAuthService:SocialAuthService) { }
 
+  onvisible(){
+    var x:any = document.getElementById("password");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+
   signinform = new FormGroup({
     phone:new FormControl("",[Validators.required]),
     password:new FormControl("",[Validators.required]),

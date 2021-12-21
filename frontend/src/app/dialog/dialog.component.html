@@ -1,0 +1,17 @@
+<div mat-dialog-content *ngIf="data.confirm == false  ">
+    <b> {{data.message}}</b>
+</div>
+<div mat-dialog-title *ngIf="data.confirm == true  ">
+    <p>Hello, {{data.text}}</p>
+</div>
+<div mat-dialog-content *ngIf="data.confirm == true  ">
+   <b>{{data.message}}</b>
+</div>
+<div *ngIf="data.confirm == false  " fxLayout="row" fxLayoutAlign="end center" style="margin: 20px;">
+    <button mat-raised-button color="warn"  [mat-dialog-close]="true">Yes</button> &nbsp; &nbsp; &nbsp;
+    <button mat-raised-button color="primary" [mat-dialog-close]="false">No</button>
+</div>
+<div *ngIf="data.confirm == true  " fxLayout="row" fxLayoutAlign="end center" style="margin: 20px;">
+    <button mat-raised-button color="warn"  [mat-dialog-close]="true">Yes</button>
+</div>
+

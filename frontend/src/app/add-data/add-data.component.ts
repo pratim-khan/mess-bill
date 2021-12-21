@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServerService } from '../server.service';
+import {MatDialog} from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-add-data',
@@ -13,7 +15,7 @@ export class AddDataComponent implements OnInit {
   public data:any
   public patchdata:any
   public Uid:any
-  constructor(private server:ServerService ,private router:Router, private fb: FormBuilder ,private route:ActivatedRoute) { }
+  constructor(private server:ServerService ,private router:Router, private fb: FormBuilder ,private route:ActivatedRoute , private dialog:MatDialog) { }
   ngOnInit(): void {
     this.test= localStorage.getItem("name");
     this.addDynamicControls();
@@ -44,11 +46,26 @@ export class AddDataComponent implements OnInit {
   public test:any
   public autheticate:any=true
   onsubmit() {
-    this.server.addData(this.dataform.value).subscribe(
-      (res:any)=>{
-      this.router.navigate(['home'])
+  const dialogRef = this.dialog.open(DialogComponent,{
+    width:"350px",
+    data:{
+      message:"Are you really add this item ",
+      confirm: false
+    }
   })
-  localStorage.removeItem("editData")
+  dialogRef.afterClosed().subscribe(result=>{
+    if(result === true){
+      this.server.addData(this.dataform.value).subscribe(
+        (res:any)=>{
+        this.router.navigate(['home'])
+      })
+      localStorage.removeItem("editData")
+    }else{
+      this.router.navigate(["/home"])
+      localStorage.removeItem("editData")
+    }
+  })
+
 }
   onCancel(){
     this.router.navigate(["/home"])

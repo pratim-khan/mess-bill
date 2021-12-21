@@ -1,4 +1,5 @@
 const MongoClient = require('../mongo/mongo');
+const bcrypt = require('bcrypt');
 
 module.exports = async function (context, req) {
 
@@ -7,6 +8,9 @@ module.exports = async function (context, req) {
   const Signin = db.collection('signin')
   const data = req.body
   let phone = req.body.phone
+  var password = req.body.password
+  const salt = await bcrypt.genSalt(10);
+  req.body.password = await bcrypt.hash(password, salt);
 
   try{
     if(req.body.googleUser===false){

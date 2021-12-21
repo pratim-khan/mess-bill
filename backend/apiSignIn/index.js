@@ -1,7 +1,7 @@
 const MongoClient = require('../mongo/mongo');
 const jwt = require('jsonwebtoken');
-// const localStorage = require ("node-localstorage");
 const sessionstorage = require('sessionstorage');
+const bcrypt = require('bcrypt');
 
 module.exports = async function (context, req) {
 
@@ -9,19 +9,18 @@ module.exports = async function (context, req) {
 
   const Signin = db.collection('signin')
 
-  var token = jwt.sign({ foo: 'bar' }, 'shhhhh');
+  var token = jwt.sign({ foo: 'bar' }, 'shhhhh',{expiresIn: "1h"});
   let demo = sessionstorage.setItem("token",token)
-  let test = sessionstorage.getItem("token")
   // console.log(test)
   let id = req.body.id
   let phone = req.body.phone
   let password = req.body.password
-
   if(req.body.googleUser === false){
     try{
       console.log("Phone", req.body.googleUser)
       let rest = await Signin.findOne({phone:phone})
-      if (rest.password == password){
+      const validPassword = await bcrypt.compare(password, rest.password);
+      if (validPassword){
           context.res={
               body:{
                   text:'You are successfully signed in',

@@ -1,14 +1,16 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
+import { Component,OnInit, ViewChild} from '@angular/core';
 import { ServerService } from '../server.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SocialAuthService } from 'angularx-social-login';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
 import { MatTable } from '@angular/material/table';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ipatch } from '../interface/patch';
-import {iElement} from '../interface/element'
+import {iElement} from '../interface/element';
+import {MatDialog} from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -20,7 +22,7 @@ import {iElement} from '../interface/element'
 export class HomeComponent implements OnInit {
   public test: any;
 
-  constructor( private server:ServerService , private router:Router,public socialAuthService:SocialAuthService,) { }
+  constructor( private server:ServerService , private router:Router,public socialAuthService:SocialAuthService, public dialog: MatDialog) { }
 
   public text:any;
   public name:any;
@@ -63,14 +65,22 @@ export class HomeComponent implements OnInit {
   }
 
   async ondelete(element:any){
-    this.datasource.forEach((value:any,dex:any) => {
-      if(value == element){
-        // this.datasource.splice(dex,1)
-        console.log(element.uid)
-       this.server.deleteData(element).subscribe()
-         
+    const dialogRef = this.dialog.open(DialogComponent,{
+      data:{
+        message:"Are you really want to delete this item ",
+        confirm: false
       }
-      
+    })
+    dialogRef.afterClosed().subscribe(result=>{
+      if(result === true){
+        this.datasource.forEach((value:any,dex:any) => {
+          if(value == element){
+            this.server.deleteData(element).subscribe((res:any)=>{
+            this.server.getTable().subscribe(data=>{this.datasource=data})
+       })     
+      }
+    })
+      }
     })
   }
   public data:any
@@ -88,11 +98,18 @@ export class HomeComponent implements OnInit {
  async checkamount(){
     let res:any = await this.server.checkData(this.test).toPromise();
     this.due = res["due"]
-    if(this.due >= 0){
-      alert("You will get "+this.due+" Rs")
-    }else{
-      alert("You will pay "+ Math.abs(this.due) +" Rs")
-    }
+
+    if(!localStorage.getItem('initData')){
+      localStorage.setItem("due",this.due)
+     }
+    const dialogRef = this.dialog.open(DialogComponent,{
+      width: '350px',
+      data:{
+        text:this.test,
+        message: this.due,
+        confirm:true
+      }
+    })
 
     }
     onlogout(){
@@ -108,3 +125,4 @@ export class HomeComponent implements OnInit {
       this.datasource= [...this.datasource]
   }
 }
+

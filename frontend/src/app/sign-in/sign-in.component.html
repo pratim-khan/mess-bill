@@ -15,10 +15,13 @@
                           <mat-error *ngIf="phone?.hasError('required')">please enter your Phone</mat-error>
                     </mat-form-field>
                 </div>
-                <div class="password">
+                <div class="password" >
                     <mat-form-field appearance="outline">
                         <mat-label>Password</mat-label>
-                        <input formControlName='password' matInput placeholder="Enter your password">
+                        <div fxLayout="row">
+                            <input type="password" formControlName='password' id="password" matInput placeholder="Enter your password">
+                            <mat-icon (click)="onvisible()">visibility</mat-icon>
+                        </div>
                         <mat-error *ngIf="password?.hasError('required')">please enter Password</mat-error>
                     </mat-form-field>
                 </div>
