@@ -4,12 +4,12 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SocialAuthService } from 'angularx-social-login';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTable } from '@angular/material/table';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { ipatch } from '../interface/patch';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {iElement} from '../interface/element';
 import {MatDialog} from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -22,21 +22,23 @@ import { DialogComponent } from '../dialog/dialog.component';
 export class HomeComponent implements OnInit {
   public test: any;
 
-  constructor( private server:ServerService , private router:Router,public socialAuthService:SocialAuthService, public dialog: MatDialog) { }
+  constructor( private server:ServerService , private router:Router,public socialAuthService:SocialAuthService, public dialog: MatDialog ) { }
 
   public text:any;
   public name:any;
   // public test:any;
   public authenticate = true;
-  // @ViewChild(MatPaginator)private paginator : MatPaginator
-  ngAfterViewInit() {
-    // this.datasource.paginator = this.paginator;
-  }
+  @ViewChild('paginator') paginator !: MatPaginator
+  // ngAfterViewInit() {
+  //   this.datasource.paginator = this.paginator;
+  // }
   async ngOnInit() {
-    this.server.getTable().subscribe(data=>{this.datasource=data},error=>{this.router.navigate([''])})
+    this.server.getTable().subscribe((data:any)=>{this.datasource= new MatTableDataSource(data),
+    this.datasource.paginator = this.paginator},
+    (error:any)=>{this.router.navigate([''])})
+    
     this.test = localStorage.getItem("name");
     this.patchvalue=this.server.editdata()
-
     // SOCKET
 
   }
@@ -48,7 +50,7 @@ export class HomeComponent implements OnInit {
 
   public month = this.monthNames[this.d.getMonth()];
   public year = this.d.getFullYear();
-  public datasource :any
+  public datasource :any = []
   displayedColumns: string[] = ['date', 'name', 'description', 'amount','action','delete' ];
 
   editform = new FormGroup({
@@ -110,11 +112,23 @@ export class HomeComponent implements OnInit {
         confirm:true
       }
     })
-
     }
     onlogout(){
-      this.router.navigate([''])
-      localStorage.removeItem("token")
+      // this.router.navigate([''])
+      // localStorage.removeItem("token")
+      const dialogRef = this.dialog.open(DialogComponent,{
+        width:'350px',
+        data:{
+          message:'Are you really want to log out',
+          confirm:false
+        }
+      })
+      dialogRef.afterClosed().subscribe((result:any)=>{
+        if(result===true){
+          this.router.navigate([''])
+          localStorage.removeItem("token")
+        }
+      })
   }
   // drop-down
   // drop-down
@@ -124,5 +138,8 @@ export class HomeComponent implements OnInit {
       moveItemInArray(this.datasource, event.previousIndex, event.currentIndex);
       this.datasource= [...this.datasource]
   }
+
+  // paginator
+  // @ViewChild('paginator') paginator!: MatPaginator;
 }
 

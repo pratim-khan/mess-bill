@@ -23,13 +23,15 @@ export class SignInComponent implements OnInit {
 
 
   constructor(private server:ServerService , private router:Router ,private _snackBar: MatSnackBar,public socialAuthService:SocialAuthService) { }
-
+  public visible:any = "visibility"
   onvisible(){
     var x:any = document.getElementById("password");
     if (x.type === "password") {
       x.type = "text";
+      this.visible = "visibility_off"
     } else {
       x.type = "password";
+      this.visible = "visibility"
     }
   }
 

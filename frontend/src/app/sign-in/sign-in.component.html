@@ -20,7 +20,7 @@
                         <mat-label>Password</mat-label>
                         <div fxLayout="row">
                             <input type="password" formControlName='password' id="password" matInput placeholder="Enter your password">
-                            <mat-icon (click)="onvisible()">visibility</mat-icon>
+                            <mat-icon (click)="onvisible()">{{visible}}</mat-icon>
                         </div>
                         <mat-error *ngIf="password?.hasError('required')">please enter Password</mat-error>
                     </mat-form-field>
@@ -49,5 +49,4 @@
     </div>
 
 </div>
-<ng-http-loader></ng-http-loader>
 

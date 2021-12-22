@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Spinkit } from 'ng-http-loader';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'messBill';
-  public message=""
+  public message="";
+  spinnerStyle = Spinkit;
 }

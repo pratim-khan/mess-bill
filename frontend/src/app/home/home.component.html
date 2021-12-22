@@ -19,7 +19,7 @@
 </div>
 
 <!-- id Column -->
-<div  fxLayout="row" fxLayoutAlign="center center" class="example-list" >
+<div  fxLayout="column" fxLayoutAlign="center center" class="example-list" >
   <table mat-table [dataSource]='datasource' class="example-box" cdkDropList (cdkDropListDropped)="dropTable($event)" class="mat-elevation-z8" style="width:90%;" id="table">
     <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef> <b>Date</b>  </th>
@@ -67,8 +67,8 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag></tr>
-  </table>
-  <!-- <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator> -->
+  </table>  
 </div>
+<mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" ></mat-paginator>
 
-<ng-http-loader></ng-http-loader>
+
