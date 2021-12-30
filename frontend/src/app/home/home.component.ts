@@ -9,7 +9,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import {iElement} from '../interface/element';
 import {MatDialog} from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
-import { DataSource } from '@angular/cdk/collections';
+
 
 @Component({
   selector: 'app-home',
@@ -26,14 +26,11 @@ export class HomeComponent implements OnInit {
 
   public text:any;
   public name:any;
-  // public test:any;
   public authenticate = true;
   @ViewChild('paginator') paginator !: MatPaginator
-  // ngAfterViewInit() {
-  //   this.datasource.paginator = this.paginator;
-  // }
+
   async ngOnInit() {
-    this.server.getTable().subscribe((data:any)=>{this.datasource=new MatTableDataSource(data),
+    this.server.getTable().subscribe((data:any)=>{this.datasource.data= data,
     this.datasource.paginator = this.paginator},
     (error:any)=>{this.router.navigate([''])})
     
@@ -50,7 +47,7 @@ export class HomeComponent implements OnInit {
 
   public month = this.monthNames[this.d.getMonth()];
   public year = this.d.getFullYear();
-  public datasource :any
+  datasource = new MatTableDataSource<any>();
   displayedColumns: string[] = ['date', 'name', 'description', 'amount','action','delete' ];
 
   editform = new FormGroup({
@@ -75,15 +72,19 @@ export class HomeComponent implements OnInit {
     })
     dialogRef.afterClosed().subscribe(result=>{
       if(result === true){
-        this.datasource.forEach((value:any,dex:any) => {
+        this.datasource.data.forEach((value:any,dex:any) => {
           if(value == element){
             this.server.deleteData(element).subscribe((res:any)=>{
             this.server.getTable().subscribe((data:any)=>{this.datasource= data})
        })     
       }
     })
+      }else{
+        window.location.reload()
       }
-    })
+      window.location.reload()
+    }
+    )
   }
   public data:any
   public patchvalue:any=[]

@@ -31,9 +31,6 @@ export class ServerService {
   // getMonth():Observable<imonth>{
   //   return this.http.get<imonth>(this.urlMonth)
   // }
-  getData():Observable<iElement>{
-    return this.http.get<iElement>(this.url)
-  }
 
   addData(user:any){
     return this.http.post(this.urlpost,user)
@@ -64,7 +61,11 @@ export class ServerService {
     return this.http.post(this.urlregister,user)
   }
   checkGetData(){
-    return this.http.get(this.checkget)
+    return this.http.get(this.checkget,
+      {
+        observe:'body',
+        params : new HttpParams().append('token',localStorage.getItem('token')||"{}")
+      })
   }
   checkpostdata(user:any){
     return this.http.post(this.checkPost,user)
