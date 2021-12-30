@@ -17,8 +17,11 @@ export class ServerService {
   public urldelete = "http://localhost:7071/api/apiDelete";
   public urlupdate = "http://localhost:7071/api/apiUpdate";
   public urledit ="http://localhost:7071/api/apiEdit";
-  public checkurl ="http://localhost:7071/api/testApi";
-  public urlregister="http://localhost:7071/api/apiRegister"
+  // public checkurl ="http://localhost:7071/api/testApi";
+  public checkurl ="http://localhost:7071/api/calculationApi";
+  public urlregister="http://localhost:7071/api/apiRegister";
+  public checkget = "http://localhost:7071/api/getcheckApi";
+  public checkPost = "http://localhost:7071/api/postCheckApi"
 
   constructor(private http:HttpClient) { }
 
@@ -59,5 +62,11 @@ export class ServerService {
   }
   registerdata(user:any){
     return this.http.post(this.urlregister,user)
+  }
+  checkGetData(){
+    return this.http.get(this.checkget)
+  }
+  checkpostdata(user:any){
+    return this.http.post(this.checkPost,user)
   }
 }

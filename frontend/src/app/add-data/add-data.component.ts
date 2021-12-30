@@ -49,7 +49,7 @@ export class AddDataComponent implements OnInit {
   const dialogRef = this.dialog.open(DialogComponent,{
     width:"350px",
     data:{
-      message:"Are you really add this item ",
+      message:"Are you really want to add this item ",
       confirm: false
     }
   })

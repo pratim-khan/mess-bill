@@ -24,7 +24,7 @@ module.exports = async function (context, req) {
           context.res={
               body:{
                   text:'You are successfully signed in',
-                  name:rest.name ,
+                  name:rest.firstName ,
                   token: token
               }
           }
@@ -57,7 +57,7 @@ module.exports = async function (context, req) {
         context.res={
             body:{
                 text:'You are successfully signed in',
-                name:demo.name ,
+                name:demo.firstName ,
                 token: token
             }
         }

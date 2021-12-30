@@ -5,11 +5,11 @@ import { Router } from '@angular/router';
 import { SocialAuthService } from 'angularx-social-login';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import {iElement} from '../interface/element';
 import {MatDialog} from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
-import { delay } from 'rxjs/operators';
+import { DataSource } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-home',
@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
   //   this.datasource.paginator = this.paginator;
   // }
   async ngOnInit() {
-    this.server.getTable().subscribe((data:any)=>{this.datasource= new MatTableDataSource(data),
+    this.server.getTable().subscribe((data:any)=>{this.datasource=new MatTableDataSource(data),
     this.datasource.paginator = this.paginator},
     (error:any)=>{this.router.navigate([''])})
     
@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
 
   public month = this.monthNames[this.d.getMonth()];
   public year = this.d.getFullYear();
-  public datasource :any = []
+  public datasource :any
   displayedColumns: string[] = ['date', 'name', 'description', 'amount','action','delete' ];
 
   editform = new FormGroup({
@@ -78,7 +78,7 @@ export class HomeComponent implements OnInit {
         this.datasource.forEach((value:any,dex:any) => {
           if(value == element){
             this.server.deleteData(element).subscribe((res:any)=>{
-            this.server.getTable().subscribe(data=>{this.datasource=data})
+            this.server.getTable().subscribe((data:any)=>{this.datasource= data})
        })     
       }
     })
@@ -134,12 +134,22 @@ export class HomeComponent implements OnInit {
   // drop-down
   @ViewChild('dataTable')
   table!: MatTable<iElement>;
-  dropTable(event: CdkDragDrop<any[]>): void {
-      moveItemInArray(this.datasource, event.previousIndex, event.currentIndex);
-      this.datasource= [...this.datasource]
+  drop(event: CdkDragDrop<MatTableDataSource<any[]>,any>): void {
+      // moveItemInArray(this.datasource, event.previousIndex, event.currentIndex);
+      // this.datasource= [...this.datasource]
+      // this.datasource = new MatTableDataSource
+      // this.datasource.data = clonedeep(this.datasource.data);
+      if (event.previousContainer === event.container) {
+        moveItemInArray(event.container.data.data, event.previousIndex, event.currentIndex);
+      } 
+      else {
+        transferArrayItem(event.previousContainer.data.data, event.container.data.data, event.previousIndex, event.currentIndex);
+      }
+      console.log(this.datasource)
   }
 
   // paginator
   // @ViewChild('paginator') paginator!: MatPaginator;
 }
+
 

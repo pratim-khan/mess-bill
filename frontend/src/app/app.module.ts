@@ -26,7 +26,10 @@ import { RegisterComponent } from './register/register.component';
 import { GoogleLoginProvider,SocialLoginModule } from 'angularx-social-login';
 import { AuthGuardService } from './auth-guard.service';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {DragDropModule} from '@angular/cdk/drag-drop'
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatCardModule} from '@angular/material/card';
 
 import { environment } from 'src/environments/environment';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
@@ -74,7 +77,10 @@ const config: SocketIoConfig = {
     DragDropModule,
     SocketIoModule.forRoot(config),
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatCardModule
   ],
 
   providers: [{

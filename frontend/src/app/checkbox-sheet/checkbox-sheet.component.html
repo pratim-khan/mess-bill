@@ -1,1 +1,96 @@
-<p>checkbox-sheet works!</p>
+<div fxLayout="row" fxLayoutAlign="space-around center" style="background-color: #4651A6;color: white;">
+  <div>
+    <h2>Welcome {{test}}</h2>
+  </div>
+  <!-- <div>
+    <small>{{month}}</small> &nbsp;&nbsp;&nbsp;
+    <small>{{year}}</small>
+  </div>
+  <div>
+    <button mat-raised-button (click)="onlogout()" >Log Out</button>
+  </div> -->
+</div>
+<div fxLayout="row" fxLayoutGap='10%' style="margin: 2% 5%;" >
+  <a><button  mat-raised-button color="primary" (click)="addRow()" > Add row</button></a>
+  <a href="home"><button  mat-raised-button color="primary" > Home</button></a>
+</div>
+<div fxLayout="column" fxLayoutAlign="center center">
+  <table mat-table [dataSource]='dataSource' class="example-box" class="mat-elevation-z8" style="width:90%;" id="table">
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> <b>Date</b>  </th>
+      <td mat-cell *matCellDef="let element">
+        <div >{{element.date}} </div> 
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Chinmoy">
+      <th mat-header-cell *matHeaderCellDef> <b>Chinmoy</b>  </th>
+      <td mat-cell *matCellDef="let element">
+        <div > <mat-checkbox  [checked]= element.Chinmoy class="example-margin" ></mat-checkbox> </div> 
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Kamal">
+      <th mat-header-cell *matHeaderCellDef> <b>Kamal</b>  </th>
+      <td mat-cell *matCellDef="let element">
+        <div ><mat-checkbox [checked]= element.Kamal class="example-margin" ></mat-checkbox> </div> 
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Pratim">
+      <th mat-header-cell *matHeaderCellDef> <b>Pratim</b>  </th>
+      <td mat-cell *matCellDef="let element">
+        <div ><mat-checkbox [checked]= element.Pratim class="example-margin"  ></mat-checkbox> </div> 
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Sourav">
+      <th mat-header-cell *matHeaderCellDef> <b>Sourav</b>  </th>
+      <td mat-cell *matCellDef="let element">
+        <div ><mat-checkbox [checked]= element.Sourav class="example-margin" ></mat-checkbox> </div> 
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Subhankar">
+      <th mat-header-cell *matHeaderCellDef> <b>Subhankar</b>  </th>
+      <td mat-cell *matCellDef="let element">
+        <div ><mat-checkbox [checked]= element.Subhankar class="example-margin"></mat-checkbox> </div> 
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Swagata">
+      <th mat-header-cell *matHeaderCellDef> <b>Swagata</b>  </th>
+      <td mat-cell *matCellDef="let element">
+        <div ><mat-checkbox [checked]= element.Swagata class="example-margin"></mat-checkbox></div> 
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+  </table>
+  <div id="form"  style="width: 90%; display: none;" >
+    <mat-card>
+      <form action="" [formGroup]="newRow"  fxLayout="row" fxLayoutAlign="space-around center">
+        <div class="width">
+        <!-- <mat-label formControlName="date" >{}}</mat-label> -->
+        <input formControlName='date' matInput  value= {{length}}>
+        </div>
+        <div class="width">
+          <mat-checkbox formControlName="Pratim" class="example-margin" ></mat-checkbox>
+        </div>
+        <div class="width">
+          <mat-checkbox formControlName="Chinmoy" class="example-margin" ></mat-checkbox>
+        </div>
+        <div class="width">
+          <mat-checkbox formControlName="Swagata" class="example-margin" ></mat-checkbox>
+        </div>
+        <div class="width">
+          <mat-checkbox formControlName="Subhankar" class="example-margin" ></mat-checkbox>
+        </div>
+        <div class="width">
+          <mat-checkbox formControlName="Kamal" class="example-margin" ></mat-checkbox>
+        </div>
+        <div class="width">
+          <mat-checkbox formControlName="Sourav" class="example-margin" ></mat-checkbox>
+        </div>
+      </form>
+      <div fxLayout="row" fxLayoutAlign="end center"  fxLayoutGap='10%' style="margin: 1% 5%;" >
+        <button mat-raised-button (click)="saveRow()">save</button>
+        <button mat-raised-button color="accent" (click)="cancel()">cancel</button>
+      </div>
+    </mat-card>
+  </div>
+</div>
