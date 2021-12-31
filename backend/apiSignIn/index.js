@@ -11,13 +11,11 @@ module.exports = async function (context, req) {
 
   var token = jwt.sign({ foo: 'bar' }, 'shhhhh',{expiresIn: "1h"});
   let demo = sessionstorage.setItem("token",token)
-  // console.log(test)
   let id = req.body.id
   let phone = req.body.phone
   let password = req.body.password
   if(req.body.googleUser === false){
     try{
-      console.log("Phone", req.body.googleUser)
       let rest = await Signin.findOne({phone:phone})
       const validPassword = await bcrypt.compare(password, rest.password);
       if (validPassword){
@@ -49,10 +47,7 @@ module.exports = async function (context, req) {
     }
   }else{
     try{
-      console.log("Google", req.body.email)
       let demo = await Signin.findOne({email:req.body.email})
-      
-      console.log(demo.id , id , demo.id == id)
       if (demo.id ==  id){
         context.res={
             body:{

@@ -6,8 +6,6 @@ module.exports = async function (context, req) {
     const Check = db.collection('check')
     let token = req.query.token
     let test = sessionstorage.getItem("token")
-    console.log(token)
-    console.log(test)
     try{
         if(token === test){
             let rest = await Check.find({}).toArray()

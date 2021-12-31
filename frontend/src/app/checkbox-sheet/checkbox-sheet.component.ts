@@ -24,8 +24,6 @@ export class CheckboxSheetComponent implements OnInit {
     this.server.checkGetData().subscribe((res:any)=>{this.dataSource.data = res,
     this.dataSource.paginator = this.paginator}, 
     (error:any)=>{this.router.navigate([''])})
-    // this.dataSource.data = res
-    console.log(((Object.keys(this.dataSource.data).length)+1))
   }
   displayedColumns: string[] = Object.keys(UserSchema);
   dataSchema = UserSchema;
@@ -43,8 +41,7 @@ export class CheckboxSheetComponent implements OnInit {
         this.newRow.patchValue({
           date:this.length
         })
-        console.log(this.newRow.value)
-        console.log(this.dataSource.data)
+
         this.server.checkpostdata(this.newRow.value).subscribe((res:any)=>{
           this.server.checkGetData().subscribe();
         })
@@ -59,15 +56,12 @@ export class CheckboxSheetComponent implements OnInit {
   }
   public change: any = 0
   GetStats(event:any) {
-    console.log( event.checked);
     let check = event.checked
     if(check == true){
       this.change = 1
     }else{
       this.change = 0
     }
-    console.log(this.change)
-    console.log(this.dataSource.data)
   }
 public length:any
 newRow = this.fb.group({
@@ -82,10 +76,7 @@ newRow = this.fb.group({
 addRow(){ 
   let x:any = document.getElementById('form')?.style;
   x.display = "block"
-  console.log(localStorage.getItem("length"))
-  console.log(((Object.keys(this.dataSource.data).length)+1))
  this.length = ((Object.keys(this.dataSource.data).length)+1)
-  console.log(length)
 }
 cancel(){
   window.location.reload()

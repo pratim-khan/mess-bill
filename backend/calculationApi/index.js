@@ -28,9 +28,7 @@ module.exports = async function (context, req) {
             continue
         }
     }
-    console.log(totalMeal)
     let perMealAmount = totalAmount[0].total / totalMeal
-    console.log(perMealAmount)
 
     let dataMeal = await Check.aggregate([ { $match : { [data]: true }  } ,{$group:{_id:null,total:{$sum:1}}}]).toArray();
     let x = perMealAmount * dataMeal[0].total

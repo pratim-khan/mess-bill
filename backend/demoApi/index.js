@@ -8,9 +8,7 @@ module.exports = async function (context, req) {
   const { db, connection } = await MongoClient()
 
   let test = sessionstorage.getItem("token")
-  // console.log(test)
     let token = req.query.token
-  //  console.log(token)
 }
   
   

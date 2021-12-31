@@ -146,11 +146,7 @@ export class HomeComponent implements OnInit {
       else {
         transferArrayItem(event.previousContainer.data.data, event.container.data.data, event.previousIndex, event.currentIndex);
       }
-      console.log(this.datasource)
   }
-
-  // paginator
-  // @ViewChild('paginator') paginator!: MatPaginator;
 }
 
 

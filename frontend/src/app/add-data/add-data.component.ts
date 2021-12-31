@@ -26,7 +26,7 @@ export class AddDataComponent implements OnInit {
   }
   public dataform =  this.fb.group({
     date: new FormControl('',[Validators.required]),
-    amount: new FormControl(0 ,[Validators.required]),
+    amount: new FormControl(parseInt('') ,[Validators.required]),
     description: new FormControl(''),
     isdelete: new FormControl(false),
     uid : new FormControl(0)
