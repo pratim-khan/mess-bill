@@ -81,5 +81,12 @@ addRow(){
 cancel(){
   window.location.reload()
 }
+colour(element:any){
+  if(element === true){
+    return "primary"
+  }else{
+    return "warn"
+  }
+}
 
 }

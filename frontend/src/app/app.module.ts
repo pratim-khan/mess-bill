@@ -38,13 +38,6 @@ import { CheckboxSheetComponent } from './checkbox-sheet/checkbox-sheet.componen
 import { DialogComponent } from './dialog/dialog.component';
 
 
-const config: SocketIoConfig = {
-	url: environment.socketUrl, // socket server url;
-	options: {
-		transports: ['websocket']
-	}
-}
-
 
 @NgModule({
   declarations: [
@@ -75,7 +68,6 @@ const config: SocketIoConfig = {
     SocialLoginModule,
     MatPaginatorModule,
     DragDropModule,
-    SocketIoModule.forRoot(config),
     MatDialogModule,
     MatIconModule,
     MatCheckboxModule,
