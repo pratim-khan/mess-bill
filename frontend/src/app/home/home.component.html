@@ -13,9 +13,9 @@
 
 <!-- *********************************** -->
 <!-- form field -->
-<div fxLayout="row" fxLayoutGap='10%' style="margin: 2% 5%;" >
-  <a href="home/add"><button  mat-raised-button color="primary" > Add row</button></a>
-  <a href="home/check"><button  mat-raised-button color="primary" > Check Meal</button></a>
+<div fxLayout="row" fxLayoutGap='5%' style="margin: 2% 5%;" >
+  <a routerLink="add"><button  mat-raised-button color="primary" > Add row</button></a>
+  <a routerLink="check"><button  mat-raised-button color="primary" > Check Meal</button></a>
   <a><button  mat-raised-button color="primary" (click)="checkamount()" > Check Due</button></a>
 </div>
 
@@ -68,8 +68,10 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true" ></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag></tr>
-  </table>  
+  </table> 
 </div>
-<mat-paginator #paginator class="mat-paginator-sticky" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" ></mat-paginator>
+<mat-paginator  #paginator class="mat-paginator-sticky" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" ></mat-paginator>
+
+
 
 

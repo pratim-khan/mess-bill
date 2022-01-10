@@ -59,7 +59,7 @@ export class SignInComponent implements OnInit {
       localStorage.setItem("name",this.name)
      }
 
-    localStorage.setItem("token",this.token.toString())
+    localStorage.setItem("token",this.token)
      if(this.text==='You are successfully signed in'){
        this._snackBar.open(this.text,'OK');
 

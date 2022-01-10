@@ -17,6 +17,15 @@ import { User, UserSchema } from './user';
 export class CheckboxSheetComponent implements OnInit {
   public test = localStorage.getItem("name")
   constructor(private server:ServerService , private fb:FormBuilder ,private router:Router, private dialog:MatDialog) { }
+  
+  public d = new Date();
+  public monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"];
+  public Month = this.d.getMonth()
+  public month = this.monthNames[this.Month];
+  public year = this.d.getFullYear();
+  public daysInMonth = new Date(this.year, this.Month, 0).getDate();
+
 
   @ViewChild('paginator') paginator !: MatPaginator
 
@@ -24,6 +33,7 @@ export class CheckboxSheetComponent implements OnInit {
     this.server.checkGetData().subscribe((res:any)=>{this.dataSource.data = res,
     this.dataSource.paginator = this.paginator}, 
     (error:any)=>{this.router.navigate([''])})
+    console.log(this.daysInMonth)
   }
   displayedColumns: string[] = Object.keys(UserSchema);
   dataSchema = UserSchema;
@@ -73,10 +83,11 @@ newRow = this.fb.group({
   Sourav: [false],
   Subhankar:[false]
 })
+
 addRow(){ 
   let x:any = document.getElementById('form')?.style;
   x.display = "block"
- this.length = ((Object.keys(this.dataSource.data).length)+1)
+  this.length = ((Object.keys(this.dataSource.data).length)+1)
 }
 cancel(){
   window.location.reload()
@@ -88,5 +99,6 @@ colour(element:any){
     return "warn"
   }
 }
+
 
 }

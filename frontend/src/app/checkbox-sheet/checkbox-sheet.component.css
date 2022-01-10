@@ -23,3 +23,35 @@ th{
 mat-card{
     padding: none;
 }
+/* #colour:disabled,
+#colour[disabled]{
+  /* border: 1px solid #999999; */
+  /* background-color: blue; */
+  /* color: #666666; */
+/* } */ 
+/* .mat-checkbox-disabled{
+    background-color: blue;
+} */
+/* .checked{
+    background-color: blue !important; 
+    user-select: none;
+}
+.unchecked{
+    background-color: red !important;
+    user-select: none;
+} */
+/* ::ng-deep .mat-checkbox-disabled {
+    background-color: red !important;
+    border: 2px solid green;
+    user-select: none;
+} */
+::ng-deep .mat-checkbox-checked .mat-checkbox-background,
+::ng-deep .mat-checkbox-indeterminate .mat-checkbox-background .checked {
+background-color: #4651A6 !important;
+
+}
+/* ::ng-deep .mat-checkbox-checked .mat-checkbox-background,
+::ng-deep .mat-checkbox-indeterminate .mat-checkbox-background .indeterminate {
+background-color: #437891 !important;
+
+} */
