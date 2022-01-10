@@ -20,6 +20,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTabsModule} from '@angular/material/tabs';
 import {MatIconModule} from '@angular/material/icon';
 import { AddDataComponent } from './add-data/add-data.component';
 import { RegisterComponent } from './register/register.component';
@@ -30,12 +31,12 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatCardModule} from '@angular/material/card';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
-import { environment } from 'src/environments/environment';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import {MatDialogModule} from '@angular/material/dialog';
 import { CheckboxSheetComponent } from './checkbox-sheet/checkbox-sheet.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { HistoryComponent } from './history/history.component';
 
 
 
@@ -47,7 +48,8 @@ import { DialogComponent } from './dialog/dialog.component';
     AddDataComponent,
     RegisterComponent,
     CheckboxSheetComponent,
-    DialogComponent
+    DialogComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -64,6 +66,8 @@ import { DialogComponent } from './dialog/dialog.component';
     MatTableModule,
     MatSelectModule,
     MatSnackBarModule,
+    MatTabsModule,
+    MatTooltipModule,
     NgHttpLoaderModule.forRoot(),
     SocialLoginModule,
     MatPaginatorModule,

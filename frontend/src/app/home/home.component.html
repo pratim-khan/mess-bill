@@ -7,16 +7,17 @@
     <small>{{year}}</small>
   </div>
   <div>
-    <button mat-raised-button (click)="onlogout()" >Log Out</button>
+    <button matTooltip="Log out" mat-raised-button (click)="onlogout()" ><span class="material-icons">logout</span></button>
   </div>
 </div>
 
 <!-- *********************************** -->
 <!-- form field -->
 <div fxLayout="row" fxLayoutGap='5%' style="margin: 2% 5%;" >
-  <a routerLink="add"><button  mat-raised-button color="primary" > Add row</button></a>
-  <a routerLink="check"><button  mat-raised-button color="primary" > Check Meal</button></a>
-  <a><button  mat-raised-button color="primary" (click)="checkamount()" > Check Due</button></a>
+  <a routerLink="add"><button matTooltip="Add Row"  mat-raised-button color="primary" ><span class="material-icons">playlist_add</span></button></a>
+  <a routerLink="history"><button matTooltip="Check History"  mat-raised-button color="primary" ><span class="material-icons">history</span></button></a>
+  <a routerLink="check"><button matTooltip="Check Meal" mat-raised-button color="primary" ><span class="material-icons">playlist_add_check</span></button></a>
+  <a><button matTooltip="Check Amount"  mat-raised-button color="primary" (click)="checkamount()" ><span class="material-icons">paid</span></button></a>
 </div>
 
 <!-- id Column -->
@@ -55,19 +56,24 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element"> 
-        <a (click)="onedit(element)"><button  mat-raised-button color="primary" >Edit</button></a>
+        <a (click)="onedit(element)"><button matTooltip="Edit Row"  mat-raised-button color="primary" ><span class="material-icons">edit_note</span></button></a>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element"> 
-        <button  mat-raised-button color="primary" (click)="ondelete(element)">Delete</button>
+        <button matTooltip="Delete Row"  mat-raised-button color="primary" (click)="ondelete(element)"><span class="material-icons">delete</span></button>
       </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true" ></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="9999" style="color: red;">
+        No data to show . Please enter some data.
+      </td>
+    </tr>
   </table> 
 </div>
 <mat-paginator  #paginator class="mat-paginator-sticky" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" ></mat-paginator>

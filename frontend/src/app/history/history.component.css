@@ -1,0 +1,34 @@
+/* /* ::ng-deep .mat-form-field .mat-form-field-appearance-outline .mat-form-field-wrapper {
+    margin: 10px;
+} * */
+ 
+/* .mat-form-field{
+    height: 20px;
+} */
+.mat-row:nth-child(even){
+    background-color: #d5d5db;
+}
+.mat-header-cell{
+    background-color: #c7cff7;
+    text-align: center;
+}
+.mat-cell{
+    text-align: center;
+}
+.width{
+    width: 14.2%;
+    text-align: center;
+
+}
+input{
+    border: none;
+}
+th{
+    width: 14.2%;
+    padding: none;
+}
+::ng-deep .mat-checkbox-checked .mat-checkbox-background,
+::ng-deep .mat-checkbox-indeterminate .mat-checkbox-background .checked {
+background-color: #4651A6 !important;
+
+}

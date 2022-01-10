@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
   @ViewChild('paginator') paginator !: MatPaginator
 
   async ngOnInit() {
-    this.server.getTable().subscribe((data:any)=>{this.datasource.data= data,
+    this.server.getTable(this.month , this.year).subscribe((data:any)=>{this.datasource.data= data,
     this.datasource.paginator = this.paginator},
     (error:any)=>{this.router.navigate([''])})
     
@@ -75,7 +75,7 @@ export class HomeComponent implements OnInit {
         this.datasource.data.forEach((value:any,dex:any) => {
           if(value == element){
             this.server.deleteData(element).subscribe((res:any)=>{
-            this.server.getTable().subscribe((data:any)=>{this.datasource= data})
+            this.server.getTable(this.month , this.year).subscribe((data:any)=>{this.datasource= data})
        })     
       }
     })

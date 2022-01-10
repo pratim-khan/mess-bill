@@ -22,15 +22,15 @@ export class CheckboxSheetComponent implements OnInit {
   public monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"];
   public Month = this.d.getMonth()
+  public MONTH = this.Month + 1
   public month = this.monthNames[this.Month];
   public year = this.d.getFullYear();
   public daysInMonth = new Date(this.year, this.Month, 0).getDate();
 
-
   @ViewChild('paginator') paginator !: MatPaginator
 
  async ngOnInit(){
-    this.server.checkGetData().subscribe((res:any)=>{this.dataSource.data = res,
+    this.server.checkGetData(this.month,this.year).subscribe((res:any)=>{this.dataSource.data = res,
     this.dataSource.paginator = this.paginator}, 
     (error:any)=>{this.router.navigate([''])})
     console.log(this.daysInMonth)
@@ -53,7 +53,7 @@ export class CheckboxSheetComponent implements OnInit {
         })
 
         this.server.checkpostdata(this.newRow.value).subscribe((res:any)=>{
-          this.server.checkGetData().subscribe();
+          this.server.checkGetData(this.month,this.year).subscribe();
         })
         window.location.reload()
         localStorage.removeItem("length");

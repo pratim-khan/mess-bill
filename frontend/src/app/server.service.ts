@@ -21,27 +21,23 @@ export class ServerService {
   public checkurl ="http://localhost:7071/api/calculationApi";
   public urlregister="http://localhost:7071/api/apiRegister";
   public checkget = "http://localhost:7071/api/getcheckApi";
-  public checkPost = "http://localhost:7071/api/postCheckApi"
+  public checkPost = "http://localhost:7071/api/postCheckApi";
+  public historyUrl = "http://localhost:7071/api/apiHistory"
 
   constructor(private http:HttpClient) { }
 
   signin(signindata:any){
     return this.http.post<any>(this.url,signindata)
   }
-  // getMonth():Observable<imonth>{
-  //   return this.http.get<imonth>(this.urlMonth)
-  // }
 
   addData(user:any){
     return this.http.post(this.urlpost,user)
   }
-  getTable(){
-    // let headers = new Headers
-    // return this.http.post(this.urlgettable,user)
+  getTable(month:any,year:any){
     return this.http.get(this.urlgettable,
       {
       observe : 'body',
-      params:new HttpParams().append('token', localStorage.getItem("token") || "{}")
+      params:new HttpParams().append('token', localStorage.getItem("token") || "{}").append('month',month).append('year',year)
     }
     )
   }
@@ -60,14 +56,21 @@ export class ServerService {
   registerdata(user:any){
     return this.http.post(this.urlregister,user)
   }
-  checkGetData(){
+  checkGetData(month:any, year:any){
     return this.http.get(this.checkget,
       {
         observe:'body',
-        params : new HttpParams().append('token',localStorage.getItem('token')||"{}")
+        params : new HttpParams().append('token',localStorage.getItem('token')||"{}").append('month',month).append('year',year)
       })
   }
   checkpostdata(user:any){
     return this.http.post(this.checkPost,user)
   }
-}
+  historyGet(user:any){
+    return this.http.get(this.historyUrl,
+      {
+        observe:'body',
+        params : new HttpParams().append('month',user.month).append('year',user.year).append('token',localStorage.getItem('token')||"{}")
+      })
+    }
+  }
