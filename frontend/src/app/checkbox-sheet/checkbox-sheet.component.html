@@ -7,8 +7,8 @@
     <small>{{year}}</small>
   </div>
 </div>
-<div fxLayout="row" fxLayoutGap='10%' style="margin: 2% 5%;" >
-  <a><button matTooltip="Add Row" mat-raised-button color="primary" (click)="addRow()" ><span class="material-icons">playlist_add</span></button></a>
+<div  fxLayout="row" fxLayoutGap='10%' style="margin: 2% 5%;" >
+  <a ><button  matTooltip="Add Row" mat-raised-button color="primary" (click)="addRow()" ><span class="material-icons">playlist_add</span></button></a>
   <a href="home"><button matTooltip="Home" mat-raised-button color="primary" > <span class="material-icons">home</span></button></a>
 </div>
 <div fxLayout="column" fxLayoutAlign="center center">
@@ -68,7 +68,7 @@
       <form action="" [formGroup]="newRow"  fxLayout="row" fxLayoutAlign="space-around center">
         <div class="width">
         <!-- <mat-label formControlName="date" >{}}</mat-label> -->
-        <input formControlName='date' matInput  value= {{year}}-{{MONTH}}-{{length}}>
+        <input id="date" formControlName='date' matInput  value= {{fullDate}}>
         </div>
         <div class="width">
           <mat-checkbox formControlName="Pratim" class="example-margin" ></mat-checkbox>

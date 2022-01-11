@@ -23,6 +23,8 @@ export class AddDataComponent implements OnInit {
     this.patchdata = this.server.editdata()
     let editData:any = localStorage.getItem("editData")
     this.dataform.patchValue(JSON.parse(editData))
+    console.log(this.minDate)
+    console.log(this.maxDate)
   }
   public dataform =  this.fb.group({
     date: new FormControl('',[Validators.required]),
@@ -71,4 +73,10 @@ export class AddDataComponent implements OnInit {
     this.router.navigate(["/home"])
     localStorage.removeItem("editData")
   }
+  public DATE = new Date()
+  public year = this.DATE.getFullYear()
+  public month = (this.DATE.getMonth() + 1).toString().padStart(2,'0')
+  public Date = (this.DATE.getDate()).toString().padStart(2,'0')
+  public minDate = this.year + "-" + this.month + "-" + "01"
+  public maxDate = this.year + "-" + this.month + "-" + this.Date
 }

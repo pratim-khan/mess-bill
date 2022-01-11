@@ -22,7 +22,7 @@ export class CheckboxSheetComponent implements OnInit {
   public monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"];
   public Month = this.d.getMonth()
-  public MONTH = this.Month + 1
+  public MONTH = (this.Month + 1).toString().padStart(2,'0')
   public month = this.monthNames[this.Month];
   public year = this.d.getFullYear();
   public daysInMonth = new Date(this.year, this.Month, 0).getDate();
@@ -34,6 +34,7 @@ export class CheckboxSheetComponent implements OnInit {
     this.dataSource.paginator = this.paginator}, 
     (error:any)=>{this.router.navigate([''])})
     console.log(this.daysInMonth)
+    console.log(this.MONTH)
   }
   displayedColumns: string[] = Object.keys(UserSchema);
   dataSchema = UserSchema;
@@ -49,7 +50,7 @@ export class CheckboxSheetComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result=>{
       if(result == true){
         this.newRow.patchValue({
-          date:this.length
+          date: this.fullDate
         })
 
         this.server.checkpostdata(this.newRow.value).subscribe((res:any)=>{
@@ -83,11 +84,15 @@ newRow = this.fb.group({
   Sourav: [false],
   Subhankar:[false]
 })
-
+public Length:any
+public fullDate:any
 addRow(){ 
   let x:any = document.getElementById('form')?.style;
   x.display = "block"
   this.length = ((Object.keys(this.dataSource.data).length)+1)
+  this.Length = (this.length).toString().padStart(2,'0')
+  console.log(this.newRow.value)
+  this.fullDate = this.year + "-" + this.MONTH + "-" + this.Length
 }
 cancel(){
   window.location.reload()

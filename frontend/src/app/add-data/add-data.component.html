@@ -6,7 +6,7 @@
       <div fxLayout="row" fxLayoutAlign="space-around center">      
         <mat-form-field appearance="outline" fxFlex="40">
         <mat-label>Date</mat-label>
-        <input type="date" formControlName="date" matInput placeholder="Placeholder">
+        <input type="date" min={{minDate}} max={{maxDate}} formControlName="date" matInput placeholder="Placeholder">
         <mat-error *ngIf="date?.hasError('required')">Please enter correct date</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" fxFlex="40">

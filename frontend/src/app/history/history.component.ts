@@ -23,10 +23,12 @@ export class HistoryComponent implements OnInit {
   constructor(private fb:FormBuilder, private server:ServerService ,private router:Router) { }
 
   ngOnInit(): void {
-    for(let i=2022;i>=1970;i--){
+    for(let i=this.Year;i>=1970;i--){
       this.yearRange.push(i)
     }
   }
+  public date = new Date();
+  public Year = this.date.getFullYear();
   public test = localStorage.getItem("name")
   public monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"];
@@ -43,12 +45,12 @@ export class HistoryComponent implements OnInit {
   public displayColumns :string[] =['date','Chinmoy','Kamal','Pratim','Sourav','Subhankar','Swagata']
   onHistory(){
     this.server.getTable(this.newForm.value.month,this.newForm.value.year).subscribe(
-      (data: any)=> {this.dataSource.data = data,
-        this.dataSource.paginator = this.paginator
+      (data: any)=> {this.dataSource.data = data
+        // this.dataSource.paginator = this.paginator
       },(error:any)=>{this.router.navigate([''])
       })
-    this.server.checkGetData(this.newForm.value.month,this.newForm.value.year).subscribe((data:any)=>{this.datasource.data=data,
-     this.datasource.paginator = this.paginator
+    this.server.checkGetData(this.newForm.value.month,this.newForm.value.year).subscribe((data:any)=>{this.datasource.data=data
+    //  this.datasource.paginator = this.paginator
     })
     
     let x:any = document.getElementById('matTab')?.style;

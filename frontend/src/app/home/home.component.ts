@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
     this.test = localStorage.getItem("name");
     this.patchvalue=this.server.editdata()
     // SOCKET
-
+    
   }
 
   public movies:any
@@ -147,6 +147,8 @@ export class HomeComponent implements OnInit {
         transferArrayItem(event.previousContainer.data.data, event.container.data.data, event.previousIndex, event.currentIndex);
       }
   }
+  
+
 }
 
 
