@@ -23,7 +23,8 @@ module.exports = async function (context, req) {
               body:{
                   text:'You are successfully signed in',
                   name:rest.firstName ,
-                  token: token
+                  token: token,
+                  phone :rest.phone
               }
           }
       }else{
@@ -31,7 +32,7 @@ module.exports = async function (context, req) {
               body:{
                   text:"Password not matched",
                   name: "null",
-                  token: "null"
+                  token: "null",
               }
           }
       }
@@ -53,7 +54,8 @@ module.exports = async function (context, req) {
             body:{
                 text:'You are successfully signed in',
                 name:demo.firstName ,
-                token: token
+                token: token,
+                
             }
         }
     }

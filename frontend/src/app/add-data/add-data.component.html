@@ -21,9 +21,13 @@
           <input formControlName="description" matInput placeholder="descriptionc" onkeypress= "return /[a-z]/i.test(event.key)">
         </mat-form-field>
       </div>
+      <!-- <div>
+        <input type="file" (change)="onSelectFile($event)" formControlName='image' accept="application/JSON">
+      </div> -->
       <div fxLayout="row" fxLayoutAlign="center center">
-        <button  [disabled]="dataform.invalid" (click)="onsubmit()" mat-raised-button color="primary" style="width: 14%;">Done</button> &nbsp;&nbsp;&nbsp;&nbsp;
+        <button   (click)="onsubmit()" mat-raised-button color="primary" style="width: 14%;">Done</button> &nbsp;&nbsp;&nbsp;&nbsp;
         <button mat-raised-button color="accent" style="width: 14%;" (click)="onCancel()" >Cancel</button>
-      </div>
+      </div> 
+
     </form>
   </div>

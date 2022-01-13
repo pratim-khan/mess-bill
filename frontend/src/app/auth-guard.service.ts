@@ -4,6 +4,10 @@ import {SocialAuthService, SocialUser } from "angularx-social-login";
 import { Observable } from "rxjs";
 import { map,  tap } from "rxjs/operators";
 
+function _window():any{
+  return window
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -23,4 +27,8 @@ export class AuthGuardService implements CanActivate {
       })
     );
   }
+  get nativeWindow():any{
+    return _window();
+  }
+
 }

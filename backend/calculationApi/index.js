@@ -63,7 +63,7 @@ module.exports = async function (context, req) {
 
         a.forEach(function(item,index){
            var personamonut = parseInt(Object.values(personMeal[index])) * perMealAmount
-           var personamountpaid = personamonut - parseInt(Object.values(personAmount[index]))
+           var personamountpaid =  parseInt(Object.values(personAmount[index])) - personamonut
            personAmountPaid.push({[item]:parseInt(personamountpaid)})
         })
         context.res={

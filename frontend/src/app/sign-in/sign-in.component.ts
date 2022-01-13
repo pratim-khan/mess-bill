@@ -43,6 +43,7 @@ export class SignInComponent implements OnInit {
   public text:any
   public name:any
   public data:any
+  public Phone:any
 
   ngOnInit(): void {
   }
@@ -54,9 +55,13 @@ export class SignInComponent implements OnInit {
     this.text = res["text"]
     this.name = res["name"]
     this.token = res["token"]
+    this.Phone = res["phone"]
          
     if(!localStorage.getItem('initData')){
       localStorage.setItem("name",this.name)
+     }
+    if(!localStorage.getItem('initData')){
+      localStorage.setItem("phone",this.Phone)
      }
 
     localStorage.setItem("token",this.token)

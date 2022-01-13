@@ -9,6 +9,8 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import {iElement} from '../interface/element';
 import {MatDialog} from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
+import { PayDialogComponent } from '../pay-dialog/pay-dialog.component';
+import { AuthGuardService } from '../auth-guard.service';
 
 
 @Component({
@@ -21,8 +23,8 @@ import { DialogComponent } from '../dialog/dialog.component';
 
 export class HomeComponent implements OnInit {
   public test: any;
-
-  constructor( private server:ServerService , private router:Router,public socialAuthService:SocialAuthService, public dialog: MatDialog ) { }
+  public phone :any = localStorage.getItem('phone')
+  constructor( private server:ServerService ,private auth:AuthGuardService, private router:Router,public socialAuthService:SocialAuthService, public dialog: MatDialog ) { }
 
   public text:any;
   public name:any;
@@ -75,14 +77,13 @@ export class HomeComponent implements OnInit {
         this.datasource.data.forEach((value:any,dex:any) => {
           if(value == element){
             this.server.deleteData(element).subscribe((res:any)=>{
-            this.server.getTable(this.month , this.year).subscribe((data:any)=>{this.datasource= data})
+            this.server.getTable(this.month , this.year).subscribe((data:any)=>{this.datasource.data= data})
        })     
       }
     })
       }else{
         window.location.reload()
       }
-      window.location.reload()
     }
     )
   }
@@ -98,31 +99,73 @@ export class HomeComponent implements OnInit {
      }
 }
   public due:any
+  public Due:any
  async checkamount(){
     let res:any = await this.server.checkData(this.month,this.year).toPromise();
-    let Due:any
-    let due:any
+    // let Due:any
+    // let due:any
     for(let item of res){
       if(Object.keys(item).toString() == this.test){
-        Due = Object.values(item)
+        this.Due = parseInt(Object.values(item).toString())
       }
     }
-    if(Due <= 0){
-      this.due = "You will pay " + Due*(-1)
-    }else{
-      this.due = "You will get " + Due
-    }
+    if(this.Due <= 0){
+      this.due = "You will pay " + this.Due*(-1)
+      const dialogRef = this.dialog.open(PayDialogComponent,{
+        width: '350px',
+        data:{
+          text:this.test,
+          message: this.due,
+          confirm: true
+        }
+      })
+      dialogRef.afterClosed().subscribe((result:any)=>{
+        if(result == true){
+          rzp1.open();
+        }
+      })
+      }else{
+      this.due = "You will get " + this.Due
+      const dialogRef = this.dialog.open(DialogComponent,{
+        width: '350px',
+        data:{
+          text:this.test,
+          message: this.due,
+          confirm: true
+        }
+      })
+      }
     if(!localStorage.getItem('initData')){
       localStorage.setItem("due",this.due)
      }
-    const dialogRef = this.dialog.open(DialogComponent,{
-      width: '350px',
-      data:{
-        text:this.test,
-        message: this.due,
-        confirm:true
-      }
-    })
+     //////////////////// payment gateway
+     let options = {
+      "key": "rzp_test_wbLiqixE7ZkHlw", 
+    "amount": this.Due * (-1) *100, 
+    "currency": "INR",
+    "name": "Mess Bill",
+    "description": "Test Transaction",
+    // "image": "https://example.com/your_logo",
+    "order_id": "", 
+    "handler": function (response:any){
+        alert(response.razorpay_payment_id);
+        alert(response.razorpay_order_id);
+        alert(response.razorpay_signature)
+    },
+    "prefill": {
+        "name": this.test,
+        "email": this.test+"@gmail.com",
+        "contact": this.phone
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#4651A6"
+    }
+  };
+  let rzp1:any = new this.auth.nativeWindow.Razorpay(options);
+
     }
     onlogout(){
       // this.router.navigate([''])
@@ -157,7 +200,7 @@ export class HomeComponent implements OnInit {
         transferArrayItem(event.previousContainer.data.data, event.container.data.data, event.previousIndex, event.currentIndex);
       }
   }
-  
+
 
 }
 

@@ -31,6 +31,9 @@ export class AddDataComponent implements OnInit {
     isdelete: new FormControl(false),
     uid : new FormControl(0)
   })
+  // public dataform =  this.fb.group({
+  //   image : new FormControl('')
+  // })
   get date(){
     return this.dataform.get('date')
   }
@@ -67,6 +70,10 @@ export class AddDataComponent implements OnInit {
   })
 
 }
+// onsubmit(){
+//   console.log(this.url)
+//   this.server.addData(this.url).subscribe()
+// }
   onCancel(){
     this.router.navigate(["/home"])
     localStorage.removeItem("editData")
@@ -77,4 +84,17 @@ export class AddDataComponent implements OnInit {
   public Date = (this.DATE.getDate()).toString().padStart(2,'0')
   public minDate = this.year + "-" + this.month + "-" + "01"
   public maxDate = this.year + "-" + this.month + "-" + this.Date
+
+  // public url:any = '';
+  // onSelectFile(event:any) {
+  //   if (event.target.files && event.target.files[0] ) {
+  //     var reader = new FileReader();
+
+  //     reader.readAsText(event.target.files[0]); 
+
+  //     reader.onload = (event) => { 
+  //       this.url = event.target?.result
+  //     }
+  //   }
+  // }
 }

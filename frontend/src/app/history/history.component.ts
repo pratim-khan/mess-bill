@@ -57,7 +57,6 @@ export class HistoryComponent implements OnInit {
     })
     this.server.checkData(this.newForm.value.month,this.newForm.value.year).subscribe((data:any)=>{this.data=data
     //  this.datasource.paginator = this.paginator
-      console.log(this.data)
       for(let i of data){
         let name = Object.keys(i).toString();
         let due = parseInt(Object.values(i).toString())

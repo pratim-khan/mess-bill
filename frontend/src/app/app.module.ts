@@ -37,6 +37,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { CheckboxSheetComponent } from './checkbox-sheet/checkbox-sheet.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { HistoryComponent } from './history/history.component';
+import { PayDialogComponent } from './pay-dialog/pay-dialog.component';
 
 
 
@@ -49,7 +50,8 @@ import { HistoryComponent } from './history/history.component';
     RegisterComponent,
     CheckboxSheetComponent,
     DialogComponent,
-    HistoryComponent
+    HistoryComponent,
+    PayDialogComponent
   ],
   imports: [
     BrowserModule,
