@@ -3,7 +3,7 @@
       <h2>Hello {{test}}</h2>
     </div>
     <div>
-      <button matTooltip="Home"  mat-raised-button color="white"  (click)="onHome()"><span class="material-icons">home</span></button>
+      <button matTooltip="Home"  mat-icon-button color="white"  (click)="onHome()"><span class="material-icons">home</span></button>
     </div>
 </div>
 <div fxLayout="row" fxLayoutAlign="space-around center">
@@ -127,6 +127,11 @@
             </table>
           </div>
           <!-- <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" ></mat-paginator> -->
+        </mat-tab>
+        <mat-tab label="View paid history">
+          <div fxLayout="column"  fxLayoutAlign="center center" *ngFor="let item of data ">
+            <p>{{item|json}}</p>
+          </div>
         </mat-tab>
     </mat-tab-group>
 </div>

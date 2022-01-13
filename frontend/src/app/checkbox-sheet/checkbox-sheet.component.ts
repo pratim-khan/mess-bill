@@ -33,8 +33,6 @@ export class CheckboxSheetComponent implements OnInit {
     this.server.checkGetData(this.month,this.year).subscribe((res:any)=>{this.dataSource.data = res,
     this.dataSource.paginator = this.paginator}, 
     (error:any)=>{this.router.navigate([''])})
-    console.log(this.daysInMonth)
-    console.log(this.MONTH)
   }
   displayedColumns: string[] = Object.keys(UserSchema);
   dataSchema = UserSchema;
@@ -91,7 +89,6 @@ addRow(){
   x.display = "block"
   this.length = ((Object.keys(this.dataSource.data).length)+1)
   this.Length = (this.length).toString().padStart(2,'0')
-  console.log(this.newRow.value)
   this.fullDate = this.year + "-" + this.MONTH + "-" + this.Length
 }
 cancel(){

@@ -38,6 +38,9 @@ export class HistoryComponent implements OnInit {
     month:["",Validators.required],
     year:["",Validators.required]
   })
+  public data:any
+  public Text:any=[]
+  public colour:any=[]
   @ViewChild('paginator') paginator !: MatPaginator
   public dataSource = new MatTableDataSource<any>()
   public displayedColumns: string[] = ['date', 'name', 'description', 'amount'];
@@ -52,6 +55,24 @@ export class HistoryComponent implements OnInit {
     this.server.checkGetData(this.newForm.value.month,this.newForm.value.year).subscribe((data:any)=>{this.datasource.data=data
     //  this.datasource.paginator = this.paginator
     })
+    this.server.checkData(this.newForm.value.month,this.newForm.value.year).subscribe((data:any)=>{this.data=data
+    //  this.datasource.paginator = this.paginator
+      console.log(this.data)
+      for(let i of data){
+        let name = Object.keys(i).toString();
+        let due = parseInt(Object.values(i).toString())
+        if(due <= 0){
+          let text = name + ' , You paid ' + due*(-1)
+          this.Text.push(text)
+          this.colour.push("red")
+        }else{
+          let text = name + ' ,You got ' + due
+          this.Text.push(text)
+          this.colour.push("blue")
+        }
+      }
+    })
+    
     
     let x:any = document.getElementById('matTab')?.style;
     x.display = "block"

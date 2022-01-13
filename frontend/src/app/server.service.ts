@@ -17,12 +17,10 @@ export class ServerService {
   public urldelete = "http://localhost:7071/api/apiDelete";
   public urlupdate = "http://localhost:7071/api/apiUpdate";
   public urledit ="http://localhost:7071/api/apiEdit";
-  // public checkurl ="http://localhost:7071/api/testApi";
   public checkurl ="http://localhost:7071/api/calculationApi";
   public urlregister="http://localhost:7071/api/apiRegister";
   public checkget = "http://localhost:7071/api/getcheckApi";
   public checkPost = "http://localhost:7071/api/postCheckApi";
-  public historyUrl = "http://localhost:7071/api/apiHistory"
 
   constructor(private http:HttpClient) { }
 
@@ -50,8 +48,15 @@ export class ServerService {
   editdata():Observable<ipatch>{
     return this.http.get<ipatch>(this.urledit)
   }
-  checkData(user:any){
-    return this.http.post(this.checkurl,user)
+  // checkData(user:any){
+  //   return this.http.post(this.checkurl,user)
+  // }
+  checkData(month:any,year:any){
+    return this.http.get(this.checkurl,
+      {
+        observe:'body',
+        params : new HttpParams().append('token',localStorage.getItem('token')||"{}").append('month',month).append('year',year)
+      })
   }
   registerdata(user:any){
     return this.http.post(this.urlregister,user)
@@ -66,11 +71,4 @@ export class ServerService {
   checkpostdata(user:any){
     return this.http.post(this.checkPost,user)
   }
-  historyGet(user:any){
-    return this.http.get(this.historyUrl,
-      {
-        observe:'body',
-        params : new HttpParams().append('month',user.month).append('year',user.year).append('token',localStorage.getItem('token')||"{}")
-      })
-    }
-  }
+}

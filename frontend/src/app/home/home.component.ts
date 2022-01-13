@@ -99,9 +99,19 @@ export class HomeComponent implements OnInit {
 }
   public due:any
  async checkamount(){
-    let res:any = await this.server.checkData(this.test).toPromise();
-    this.due = res["due"]
-
+    let res:any = await this.server.checkData(this.month,this.year).toPromise();
+    let Due:any
+    let due:any
+    for(let item of res){
+      if(Object.keys(item).toString() == this.test){
+        Due = Object.values(item)
+      }
+    }
+    if(Due <= 0){
+      this.due = "You will pay " + Due*(-1)
+    }else{
+      this.due = "You will get " + Due
+    }
     if(!localStorage.getItem('initData')){
       localStorage.setItem("due",this.due)
      }

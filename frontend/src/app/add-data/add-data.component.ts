@@ -23,8 +23,6 @@ export class AddDataComponent implements OnInit {
     this.patchdata = this.server.editdata()
     let editData:any = localStorage.getItem("editData")
     this.dataform.patchValue(JSON.parse(editData))
-    console.log(this.minDate)
-    console.log(this.maxDate)
   }
   public dataform =  this.fb.group({
     date: new FormControl('',[Validators.required]),

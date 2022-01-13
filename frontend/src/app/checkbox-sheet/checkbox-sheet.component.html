@@ -8,8 +8,8 @@
   </div>
 </div>
 <div  fxLayout="row" fxLayoutGap='10%' style="margin: 2% 5%;" >
-  <a ><button  matTooltip="Add Row" mat-raised-button color="primary" (click)="addRow()" ><span class="material-icons">playlist_add</span></button></a>
-  <a href="home"><button matTooltip="Home" mat-raised-button color="primary" > <span class="material-icons">home</span></button></a>
+  <a ><button  matTooltip="Add Row" mat-mini-fab color="primary" (click)="addRow()" ><span class="material-icons">playlist_add</span></button></a>
+  <a href="home"><button matTooltip="Home" mat-mini-fab color="primary" > <span class="material-icons">home</span></button></a>
 </div>
 <div fxLayout="column" fxLayoutAlign="center center">
   <table mat-table [dataSource]='dataSource' class="example-box" class="mat-elevation-z8" style="width:90%;" id="table">
